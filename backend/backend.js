@@ -7,12 +7,12 @@ const app = express();
 const port = process.env.PORT || "8000";
 const pool = new Pool();
 
-app.use(cors);
+app.use(cors()); // if you forget the () your server does an infinite loop
 
 app.get("/", (req, res) => {
     res.status(200).send("WHATABYTE: Food For Devs");
 });
-/*
+
 app.get("/users", (req, res) => {
     pool.query("SELECT * FROM users;", (err, sqlRes) => {
         if (err) {
@@ -23,7 +23,7 @@ app.get("/users", (req, res) => {
         }
     })
 });
-*/
+
 app.listen(port, () => {
     console.log(`Listening to requests on http://localhost:${port}`);
 });
