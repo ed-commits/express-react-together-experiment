@@ -21,6 +21,7 @@ class Users extends React.Component {
     return (
       <div>
         <h2>Country Container</h2>
+    {this.state.countries.map(a => <p>{a.name}</p>)}
       </div>
     );
   }
