@@ -16,6 +16,19 @@ export default function Login() {
         console.log(username)
         console.log(password)
         event.preventDefault()
+
+        const url = 'http://localhost:8000/login';
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                username: username, 
+                password: password })
+        };
+        fetch(url, requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data));
     }
 
     return (
