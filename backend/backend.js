@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 app.get("/users", (req, res) => {
     pool.query("SELECT * FROM users;", (err, sqlRes) => {
         if (err) {
-            console.log(err.stack)
+            console.log(err)
         } else {
             console.log(sqlRes.rows);
             res.json(sqlRes.rows);
@@ -31,7 +31,7 @@ app.get("/users", (req, res) => {
 app.get("/secret", (req, res) => {
     const username = req.cookies['loggedin'];
 
-    if(!username) {
+    if (!username) {
         res.json(0);
         return;
     }
@@ -49,7 +49,8 @@ app.get("/secret", (req, res) => {
 app.post("/login", (req, res) => {
     const newData = req.body;
 
-    console.log('checking in the db')
+    console.log('checking the users password from the db');
+
     pool.query("SELECT password FROM users WHERE name = $1;", [newData.username], (err, sqlRes) => {
         if (err) {
             console.log(err)
@@ -57,8 +58,6 @@ app.post("/login", (req, res) => {
         else if (sqlRes.rows.length !== 0) {
             let knownPassword = sqlRes.rows[0].password
             console.log(`Password is ${knownPassword}`);
-
-            //    console.log(req.cookies['nameOfCookie'])
 
             if (knownPassword === newData.password) {
                 console.log(`login success`);
@@ -75,7 +74,7 @@ app.post("/login", (req, res) => {
                 return;
             }
             else {
-                console.log(`login failed <${knownPassword}> <${newData.password}>`);
+                console.log(`login failed, password mismatch <${knownPassword}> <${newData.password}>`);
             }
         }
         res.json(0);

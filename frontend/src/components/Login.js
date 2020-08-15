@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ApiUrl } from '../settings/ApiUrl';
+import { useHistory } from 'react-router-dom';
+
+
+const handleClick = () => {
+}
 
 export default function Login() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const history = useHistory();
 
     const handleChangeUsername = e => {
         setUsername(e.target.value)
@@ -23,13 +29,21 @@ export default function Login() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                username: username, 
-                password: password })
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
         };
         fetch(url, requestOptions)
             .then(response => response.json())
-            .then(data => console.log(data));
+            .then(data => {
+                if (data == 0) {
+                    console.log(data)
+                }
+                else {
+                    history.push("/secret");
+                }
+            });
     }
 
     return (
