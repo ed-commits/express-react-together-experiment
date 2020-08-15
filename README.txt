@@ -20,3 +20,14 @@ and frontend
 
 npm run start
 
+
+--------
+
+To make cookies work we use "friend.app.localhost" instead of just "localhost".
+
+We also have
+
+  "proxy": "http://friendo.app.localhost:8000"
+
+in the frontend package.json so the frontend node server passes API fetches to the backend node server but
+all the web browser sees is one server, this means cookie origin stuff isn't problematic.

@@ -10,7 +10,7 @@ const port = process.env.PORT || "8000";
 const pool = new Pool();
 
 app.use(parser.json());
-app.use(cors()); // if you forget the () your server does an infinite loop
+// app.use(cors()); // if you forget the () your server does an infinite loop
 app.use(cookieParser())
 
 app.get("/", (req, res) => {
