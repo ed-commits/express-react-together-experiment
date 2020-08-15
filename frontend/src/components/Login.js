@@ -1,24 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 
-const Login = () => (
-    <div>
-        <h4>Log in</h4>
-        <form action="post">
+export default function Login() {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
-            <div>
-                <b>username:</b>
-                <input type="text" name="username"></input>
-            </div>
+    const handleChangeUsername = e => {
+        setUsername(e.target.value)
+    }
 
-            <div>
-                <b>password:</b>
-                <input type="text" name="password"></input>
-            </div>
+    const handleChangePassword = e => {
+        setPassword(e.target.value)
+    }
 
-            <input type="submit" name="Login"></input>
+    const handleSubmit = event => {
+        console.log(username)
+        console.log(password)
+        event.preventDefault()
+    }
 
-        </form>
-    </div>
-);
+    return (
+        < div >
+            <h4>Log in</h4>
+            <form onSubmit={handleSubmit}>
 
-export default Login;
+                <div>
+                    <b>username:</b>
+                    <input type="text" name="username" onChange={handleChangeUsername}></input>
+                </div>
+
+                <div>
+                    <b>password:</b>
+                    <input type="text" name="password" onChange={handleChangePassword}></input>
+                </div>
+
+                <input type="submit" name="Login"></input>
+
+            </form>
+        </div >
+    );
+}
