@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ApiUrl } from '../settings/ApiUrl';
 
 export default function Login() {
     const [username, setUsername] = useState("")
@@ -17,7 +18,7 @@ export default function Login() {
         console.log(password)
         event.preventDefault()
 
-        const url = 'http://friendo.app.localhost/login';
+        const url = ApiUrl('login');
 
         const requestOptions = {
             method: 'POST',

@@ -10,7 +10,7 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    fetch(ApiUrl + "/users")
+    fetch(ApiUrl("users"))
       .then(res => res.json())
       .then(countries => this.setState({ countries: countries }))
       .catch(err => console.error);
