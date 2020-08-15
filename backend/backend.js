@@ -38,7 +38,7 @@ app.post("/login", (req, res) => {
 
         res.cookie('nameOfCookie', 'cookieValue', {
             maxAge: 60 * 60 * 1000, // 1 hour
-            domain: 'friendo.app.localhost:3000'
+            domain: 'friendo.app.localhost'
             //            httpOnly: true,
             //            secure: true,
             //            sameSite: true,

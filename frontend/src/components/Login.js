@@ -17,7 +17,7 @@ export default function Login() {
         console.log(password)
         event.preventDefault()
 
-        const url = 'http://friendo.app.localhost:8000/login';
+        const url = 'http://friendo.app.localhost/login';
 
         const requestOptions = {
             method: 'POST',
