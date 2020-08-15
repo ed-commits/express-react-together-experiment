@@ -9,7 +9,7 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'http://localhost:8000/users';
+    const url = 'http://friendo.app.localhost:8000/users';
 
     fetch(url)
       .then(res => res.json())
