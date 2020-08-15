@@ -19,19 +19,19 @@ class Main extends Component {
             <Router>
                 <React.Fragment>
                     <Switch>
-                        <Route path="/about" component={About} />
+                        <Route path="/app/about" component={About} />
                         <Route
-                            path="/users" component={Users}
+                            path="/app/users" component={Users}
                         />
                         <Route
-                            path="/login" component={Login}
+                            path="/app/login" component={Login}
                         />
-                        <Route path="/">
+                        <Route path="/app">
                             <p>
                                 This is the main page</p>
-                            <p><a href="/about">about</a></p>
-                            <p><a href="/users">users</a></p>
-                            <p><a href="/login">login</a></p>
+                            <p><a href="/app/about">about</a></p>
+                            <p><a href="/app/users">users</a></p>
+                            <p><a href="/app/login">login</a></p>
                         </Route>
                     </Switch>
                 </React.Fragment>
