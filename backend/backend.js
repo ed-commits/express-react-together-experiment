@@ -28,44 +28,59 @@ app.get("/users", (req, res) => {
     })
 });
 
+app.get("/secret", (req, res) => {
+    const username = req.cookies['loggedin'];
+
+    if(!username) {
+        res.json(0);
+        return;
+    }
+
+    const newData = req.body;
+    pool.query("SELECT secret FROM users WHERE name = $1;", [username], (err, sqlRes) => {
+        if (err || sqlRes.rows == 0) {
+            console.log(err)
+        } else {
+            res.json(sqlRes.rows[0].secret);
+        }
+    })
+});
+
 app.post("/login", (req, res) => {
     const newData = req.body;
 
-    console.log(req.cookies['nameOfCookie'])
+    console.log('checking in the db')
+    pool.query("SELECT password FROM users WHERE name = $1;", [newData.username], (err, sqlRes) => {
+        if (err) {
+            console.log(err)
+        }
+        else if (sqlRes.rows.length !== 0) {
+            let knownPassword = sqlRes.rows[0].password
+            console.log(`Password is ${knownPassword}`);
 
-    if (newData.username == newData.password) {
-        // login successful
+            //    console.log(req.cookies['nameOfCookie'])
 
-        res.cookie('nameOfCookie', 'cookieValue', {
-            maxAge: 60 * 60 * 1000, // 1 hour
-            domain: 'friendo.app.localhost'
-            //            httpOnly: true,
-            //            secure: true,
-            //            sameSite: true,
-        })
-        res.json("login successful")
+            if (knownPassword === newData.password) {
+                console.log(`login success`);
+                // login successful
 
-    }
-    else {
-        // login failed
-        res.json("failed to login")
-    }
-
+                res.cookie('loggedin', newData.username, {
+                    maxAge: 60 * 60 * 1000, // 1 hour
+                    domain: 'friendo.app.localhost'
+                    //            httpOnly: true,
+                    //            secure: true,
+                    //            sameSite: true,
+                })
+                res.json("login successful")
+                return;
+            }
+            else {
+                console.log(`login failed <${knownPassword}> <${newData.password}>`);
+            }
+        }
+        res.json(0);
+    })
 })
-
-/*
-let dirname = __dirname + "/../frontend/"
-app.use(express.static(path.join(dirname, 'build')))
-app.get('/app/', (req, res) => {
-    res.sendFile(path.join(dirname, 'build', 'index.html'))
-})
-app.get('/app/users', (req, res) => {
-    res.sendFile(path.join(dirname, 'build', 'index.html'))
-})
-app.get('/app/login', (req, res) => {
-    res.sendFile(path.join(dirname, 'build', 'index.html'))
-})
-*/
 
 app.listen(port, () => {
     console.log(`Listening to requests on http://localhost:${port}`);

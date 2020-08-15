@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import About from "./About";
 import Login from "./Login";
 import Users from "./Users";
+import Secret from "./Secret";
 //import SignUp from "./SignUp";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -19,19 +20,23 @@ class Main extends Component {
             <Router>
                 <React.Fragment>
                     <Switch>
-                        <Route path="/app/about" component={About} />
+                        <Route path="/about" component={About} />
                         <Route
-                            path="/app/users" component={Users}
+                            path="/users" component={Users}
                         />
                         <Route
-                            path="/app/login" component={Login}
+                            path="/login" component={Login}
+                        />
+                        <Route
+                            path="/secret" component={Secret}
                         />
                         <Route path="/">
                             <p>
                                 This is the main page</p>
-                            <p><a href="/app/about">about</a></p>
-                            <p><a href="/app/users">users</a></p>
-                            <p><a href="/app/login">login</a></p>
+                            <p><a href="/about">about</a></p>
+                            <p><a href="/users">users</a></p>
+                            <p><a href="/login">login</a></p>
+                            <p><a href="/secret">secret</a></p>
                         </Route>
                     </Switch>
                 </React.Fragment>

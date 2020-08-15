@@ -11,12 +11,12 @@ const sqlOrDie = (query) => {
     client = await pool.connect()
 
     await sqlOrDie("DROP TABLE IF EXISTS users;");
-    await sqlOrDie("CREATE TABLE users (name VARCHAR(50) NOT NULL);");
-    await sqlOrDie("INSERT INTO users (name) VALUES ('ed');");
-    await sqlOrDie("INSERT INTO users (name) VALUES ('jack');");
-    await sqlOrDie("INSERT INTO users (name) VALUES ('craig');");
-    await sqlOrDie("INSERT INTO users (name) VALUES ('nourhan');");
-    await sqlOrDie("INSERT INTO users (name) VALUES ('rumen');");
+    await sqlOrDie("CREATE TABLE users (name VARCHAR(50) NOT NULL, password VARCHAR(50) NOT NULL, secret VARCHAR(50) NOT NULL);");
+    await sqlOrDie("INSERT INTO users (name, password, secret) VALUES ('ed', 'abc', 'ed!');");
+    await sqlOrDie("INSERT INTO users (name, password, secret) VALUES ('jack', 'def', 'zombies!');");
+    await sqlOrDie("INSERT INTO users (name, password, secret) VALUES ('craig', '123', 'burgers');");
+    await sqlOrDie("INSERT INTO users (name, password, secret) VALUES ('nourhan', '456', 'wilsona!');");
+    await sqlOrDie("INSERT INTO users (name, password, secret) VALUES ('rumen', '000', 'coffee can sorting system.');");
 
     client.release()
 })()
