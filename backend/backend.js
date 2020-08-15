@@ -53,6 +53,7 @@ app.post("/login", (req, res) => {
 
 })
 
+/*
 let dirname = __dirname + "/../frontend/"
 app.use(express.static(path.join(dirname, 'build')))
 app.get('/app/', (req, res) => {
@@ -64,6 +65,7 @@ app.get('/app/users', (req, res) => {
 app.get('/app/login', (req, res) => {
     res.sendFile(path.join(dirname, 'build', 'index.html'))
 })
+*/
 
 app.listen(port, () => {
     console.log(`Listening to requests on http://localhost:${port}`);

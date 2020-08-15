@@ -26,7 +26,7 @@ class Main extends Component {
                         <Route
                             path="/app/login" component={Login}
                         />
-                        <Route path="/app">
+                        <Route path="/">
                             <p>
                                 This is the main page</p>
                             <p><a href="/app/about">about</a></p>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { ApiUrl } from '../settings/ApiUrl';
 
 class Users extends React.Component {
   constructor(props) {
@@ -9,9 +10,7 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'http://friendo.app.localhost/users';
-
-    fetch(url)
+    fetch(ApiUrl + "/users")
       .then(res => res.json())
       .then(countries => this.setState({ countries: countries }))
       .catch(err => console.error);
